@@ -8,6 +8,10 @@ const STATE = {
 function isFunction(fun) {
     return fun && typeof fun === 'function'
 }
+function isObjectOrFunction(x) {
+    let type = typeof x;
+    return x !== null && (type === 'object' || type === 'function');
+}
 
 function resolver(promise, x) {
     if (promise === x) {
@@ -21,8 +25,7 @@ function resolver(promise, x) {
         }, (err) => {
             reject.call(promise, err)
         })
-    }
-    if (x && typeof (x === 'object' && typeof x === 'function')) {
+    } else if (isObjectOrFunction(x)) {
         try {
             let then = x.then
             if (typeof then === 'function') {

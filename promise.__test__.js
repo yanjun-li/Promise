@@ -48,24 +48,8 @@ function xFactory() {
     };
 }
 
-function outerThenableFactory(value) {
-    // return {
-    //     then: function (onFulfilled) {
-    //         onFulfilled(value);
-    //     }
-    // };
-    return resolved(value);
-}
-function innerThenableFactory(value) {
-    return {
-        then: function (onFulfilled) {
-            onFulfilled(value);
-        }
-    };
-}
-
 function yFactory() {
-    return outerThenableFactory(innerThenableFactory(sentinel));
+    return null; 
 }
 
 var promise = resolved(dummy).then(function onBasePromiseFulfilled() {
@@ -82,11 +66,11 @@ function test(promise) {
 
 test(promise)
 
-p = yFactory()
-p.then(ref=>{
-    console.log(ref);
-})
-console.log(p);
+// p = yFactory()
+// p.then(ref=>{
+//     console.log(ref);
+// })
+// console.log(p);
 
 // mdn promise
 // var p1 = Promise.resolve({ 
