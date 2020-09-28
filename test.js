@@ -5,30 +5,35 @@ function doSomething() {
         setTimeout(() => {
             let value = 42;
             resolve(value)
-        }, 1000)
+        }, 10)
     })
 }
 
-p1 = MyPromise.reject('s');
-p1.then((v)=>{
+// p1 = MyPromise.reject('s');
+// p1.then((v)=>{
+//     console.log(v)
+// }, (r)=>{
+//     console.error(r)
+// })
+
+
+
+// p2 = doSomething()
+// p2
+// .then(value => {
+//     console.log(value);
+//     return 36
+// }, err => {
+//     console.error(err)
+// })
+// .then(value=>{
+//     console.log(value)
+// })
+
+p3 = MyPromise.resolve('44')
+p3.then((v)=>{
     console.log(v)
-}, (r)=>{
-    console.error(r)
 })
-
-p2 = doSomething()
-p2
-.then(value => {
-    console.log(value);
-    // throw new Error('1')
-    return 36
-}, err => {
-    console.error(err)
-})
-.then(value=>{
-    console.log(value)
-})
-
 // p
 // .then(value => {
 //     console.log(1);
