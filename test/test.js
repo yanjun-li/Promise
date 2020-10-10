@@ -1,10 +1,7 @@
-var promisesAplusTests = require("promises-aplus-tests");
-
-
-const MyPromise = require('./mypromise')
-let Promise = require('./promise_v3')
-
-// Promise = MyPromise
+// import {Promise} from '../promise_v3'
+// import Promise from 'es6-promise'
+import { Promise } from '../src/promise'
+import promisesAplusTests from 'promises-aplus-tests'
 
 var adapter = (function () {
     var res, rej;
@@ -24,15 +21,7 @@ var adapter = (function () {
     }
 })();
 
-
-// promisesAplusTests(adapter, { reporter: "landing" }, function (err) {
-// promisesAplusTests(adapter, function (err) {
-//     // All done; output is in the console. Or check `err` for number of failures.
-//     // console.error(err)
-// });
-
-const {resolved, rejected} = adapter;
-
+const { deferred, resolved, rejected } = adapter;
 
 var dummy = { dummy: "dummy" }; // we fulfill or reject with this when we don't intend to test against it
 var sentinel = { sentinel: "sentinel" }; // a sentinel fulfillment value to test for with strict equality
@@ -40,44 +29,60 @@ var other = { other: "other" }; // a value we don't want to be strict equal to
 var sentinelArray = [sentinel]; // a sentinel fulfillment value to test when we need an array
 
 
+// function xFactory() {
+//     return {
+//         then: function (resolvePromise) {
+//             resolvePromise(yFactory());
+//         }
+//     };
+// }
 function xFactory() {
     return {
-        then: function (resolvePromise) {
-            resolvePromise(yFactory());
-        }
+        a: 1
     };
 }
 
 function yFactory() {
-    return null; 
+    return null;
 }
 
-var promise = resolved(dummy).then(function onBasePromiseFulfilled() {
-    return xFactory();
-});
+let d =  deferred();
+var promise = d.promise;
 
-function test(promise) {
-    promise.then(res=>{
-        console.log('res:',res);
-    }, rej=>{
-        console.log('rej:',rej);
-    })
-}
+// promise.then(function onBasePromiseFulfilled() {
+//     return xFactory();
+// });
 
-test(promise)
-
-// p = yFactory()
-// p.then(ref=>{
-//     console.log(ref);
+// promise.then(() => {
+//     return other
 // })
-// console.log(p);
+// promise.then(() => {
+//     throw new Error('err');
+// })
 
-//mdn promise
+// promise.then(() => {
+//     console.log('ss');
+//     return other
+// })
+
+promise.then(res => {
+    console.log('res:', res);
+}, rej => {
+    console.log('rej:', rej);
+})
+
+d.resolve(sentinel);
+// function test(promise) {
+    
+// }
+
+// test(promise)
+
 var p1 = Promise.resolve({ 
     then: function(onFulfill, onReject) { onFulfill("fulfilled!"); }
   });
   console.log(p1 instanceof Promise) // true, 这是一个Promise对象
-  
+
   p1.then(function(v) {
       console.log(v); // 输出"fulfilled!"
     }, function(e) {
@@ -88,3 +93,14 @@ var p1 = Promise.resolve({
 //     throw Error('e')
 // })
 console.log(p1);
+
+let testAPlus;
+// testAPlus = true
+if (testAPlus) {
+    promisesAplusTests(adapter, {
+        // reporter: "landing"
+    }, function (err) {
+        // All done; output is in the console. Or check `err` for number of failures.
+        // console.error(err)
+    });
+}

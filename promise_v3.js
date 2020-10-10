@@ -1,5 +1,3 @@
-const { Stats } = require("fs");
-
 const STATE = {
     Pending: 0,
     Rejected: -1,
@@ -16,8 +14,7 @@ function isObjectOrFunction(x) {
 function resolver(promise, x) {
     if (promise === x) {
         throw TypeError('promise === x');
-    }
-    if (x instanceof Promise) {
+    } else if (x instanceof Promise) {
         x.then((value) => {
             // 如果value 是 thenable 对象，不能直接使用resolve
             resolver(promise, value)
@@ -186,4 +183,8 @@ Promise.reject = function (reason) {
     // resolver(promise, value);
     return promise
 }
-module.exports = Promise
+// module.exports = Promise
+
+export {
+    Promise
+}

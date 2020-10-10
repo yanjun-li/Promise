@@ -1,0 +1,30 @@
+{
+  "name": "promise",
+  "version": "1.0.0",
+  "description": "promise fulfill promise A plus",
+  "main": "dist/promise.js",
+  "dependencies": {
+    "es6-promise": "~4.2.8"
+  },
+  "devDependencies": {
+    "promises-aplus-tests": "~2.1.2",
+    "rollup": "~2.28.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanjun-li/Promise.git"
+  },
+  "keywords": [
+    "promise"
+  ],
+  "author": "liyanjun <liyanjun@do-global.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yanjun-li/Promise/issues"
+  },
+  "homepage": "https://github.com/yanjun-li/Promise#readme",
+  "type": "module"
+}

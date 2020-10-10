@@ -8,11 +8,12 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
+            "runtimeVersion": "14.12.0",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            // "program": "${workspaceFolder}/test.js"
-            "program": "${file}"
+            "program": "${file}",
+            "runtimeArgs": ["--experimental-specifier-resolution", "node"]
         }
     ]
 }
