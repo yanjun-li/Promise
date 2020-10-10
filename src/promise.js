@@ -1,6 +1,7 @@
 import { fulfill, reject } from './core'
+import {resolver} from './resolver'
 import { then } from './then'
-import { isFunction } from './utils'
+import { isFunction, noop } from './utils'
 
 class Promise {
     constructor(executor) {
@@ -30,7 +31,11 @@ class Promise {
             // if (value.constructor instanceof this.constructor) {
             return value
         }
-        const promise = new Promise((fulfill) => fulfill(value))
+        
+        // const promise = new Promise((fulfill) => fulfill(value))
+
+        const promise = new Promise(noop);
+        resolver(promise, value);
 
         return promise
     }

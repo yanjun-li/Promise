@@ -95,7 +95,7 @@ var p1 = Promise.resolve({
 console.log(p1);
 
 let testAPlus;
-// testAPlus = true
+testAPlus = true
 if (testAPlus) {
     promisesAplusTests(adapter, {
         // reporter: "landing"
